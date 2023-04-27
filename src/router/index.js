@@ -1,7 +1,10 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 import ClientHomePage from '../views/ClientHomePage'
 import ClientLoginPage from '../views/ClientLoginPage'
 import ClientProfilePage from '../views/ClientProfilePage'
+
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -18,11 +21,9 @@ const routes = [
     name: 'client profile',
     component: ClientProfilePage
   }
-
 ]
 
-const router = createRouter({
-  history: createWebHashHistory(),
+const router = new VueRouter({
   routes
 })
 

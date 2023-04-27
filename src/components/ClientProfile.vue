@@ -1,10 +1,10 @@
 <template>
   <div>
-    <section v-if="id != undefined">
+    <section v-if="this.id != undefined">
       <h1>Welcome, {{ first_name }} {{ last_name }}</h1>
-      <img :src="image_url" alt="user profile picture" />
+      <img width="200px" :src="image_url" alt="user profile picture" />
       <h1>{{ username }}</h1>
-      <h3>info</h3>
+      <h3>INFO</h3>
       <p>date created: {{ created_at }}</p>
       <p>Email: {{ email }}</p>
       <p>id: {{ id }}</p>
@@ -41,16 +41,20 @@ export default {
           "x-api-key": `H0x7V93WN4ebcatCvCI3`,
         },
         method: `GET`,
-        data: {
+        params: {
           client_id: clientjson,
         },
       })
       .then((response) => {
-        response;
-        console.log(response);
+        this.created_at = response.data[0].created_at;
+        this.email = response.data[0].email;
+        this.first_name = response.data[0].first_name;
+        this.last_name = response.data[0].last_name;
+        this.id = response.data[0].id;
+        this.image_url = response.data[0].image_url;
+        this.username = response.data[0].username;
       })
       .catch((error) => {
-        error;
         console.log(error.response.data);
       });
   },

@@ -5,10 +5,6 @@
     <label for="password">Password</label>
     <input type="text" id="password" ref="userPassword" />
     <button @click="login">Log in</button>
-    <section>
-      <input type="text" ref="idNum" />
-      <button @click="getInfo">get info</button>
-    </section>
   </div>
 </template>
 
