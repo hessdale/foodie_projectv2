@@ -3,7 +3,6 @@
     <client-profile></client-profile>
     <button @click="editstatus">edit profile</button>
     <section v-if="edit === true">
-      <client-edit-profile></client-edit-profile>
       <label for="Email">Email: </label>
       <input type="text" id="Email" ref="userEmail" />
       <button @click="sendEmail">Change Email</button>
@@ -22,18 +21,48 @@
       <label for="Password">Password: </label>
       <input type="text" id="Password" ref="userPassword" />
       <button @click="sendPassword">Change Password</button>
+
+      <label for="passdel">Password to delete account: </label>
+      <input type="text" id="passdel" ref="password" />
+      <button @click="deleteAccount">DELETE ACCOUNT</button>
     </section>
   </div>
 </template>
 
 <script>
 import ClientProfile from "@/components/ClientProfile.vue";
-import ClientEditProfile from "@/components/ClientEditProfile.vue";
 import cookies from "vue-cookies";
 import axios from "axios";
 
 export default {
   methods: {
+    deleteAccount() {
+      let password = this.$refs.password[`value`];
+      let cookietoken = cookies.get(`token`);
+
+      axios
+        .request({
+          url: `https://foodie.bymoen.codes/api/client`,
+          headers: {
+            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
+            token: cookietoken,
+          },
+          method: `DELETE`,
+          data: {
+            password: password,
+          },
+        })
+        .then((response) => {
+          response;
+          cookies.set(`token`, undefined);
+          cookies.set(`client_id`, undefined);
+          console.log(response);
+        })
+        .catch((error) => {
+          error;
+          console.log(error);
+        });
+    },
     editstatus() {
       if (this.edit == false) {
         this.edit = true;
@@ -69,12 +98,13 @@ export default {
     },
     sendFirst() {
       let first = this.$refs.userFirstName[`value`];
+      let cookietoken = cookies.get(`token`);
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/client`,
           headers: {
             "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: JSON.parse(cookies.get(`token`)),
+            token: cookietoken,
           },
           method: `PATCH`,
           data: {
@@ -93,12 +123,13 @@ export default {
     },
     sendLast() {
       let last = this.$refs.userLastName[`value`];
+      let cookietoken = cookies.get(`token`);
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/client`,
           headers: {
             "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: JSON.parse(cookies.get(`token`)),
+            token: cookietoken,
           },
           method: `PATCH`,
           data: {
@@ -117,12 +148,13 @@ export default {
     },
     sendPfp() {
       let pfp = this.$refs.userPfp[`value`];
+      let cookietoken = cookies.get(`token`);
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/client`,
           headers: {
             "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: JSON.parse(cookies.get(`token`)),
+            token: cookietoken,
           },
           method: `PATCH`,
           data: {
@@ -141,12 +173,13 @@ export default {
     },
     sendUsername() {
       let username = this.$refs.userUsername[`value`];
+      let cookietoken = cookies.get(`token`);
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/client`,
           headers: {
             "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: JSON.parse(cookies.get(`token`)),
+            token: cookietoken,
           },
           method: `PATCH`,
           data: {
@@ -165,12 +198,13 @@ export default {
     },
     sendPassword() {
       let password = this.$refs.userPassword[`value`];
+      let cookietoken = cookies.get(`token`);
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/client`,
           headers: {
             "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: JSON.parse(cookies.get(`token`)),
+            token: cookietoken,
           },
           method: `PATCH`,
           data: {
@@ -195,10 +229,12 @@ export default {
   },
   components: {
     ClientProfile,
-    ClientEditProfile,
   },
 };
 </script>
 
 <style scoped>
+div {
+  margin-top: 20px;
+}
 </style>
