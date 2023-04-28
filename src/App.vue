@@ -6,6 +6,7 @@
       <router-link to="/clientlogin">clientlogin</router-link> |
       <router-link to="/clientprofile">clientprofile</router-link> |
       <router-link to="/restaurantlogin">restaurantlogin</router-link> |
+      <router-link to="/restaurantprofile">restaurantProfile</router-link> |
     </nav>
     <router-view />
   </div>

@@ -19,16 +19,6 @@
     <label for="Password">Password: </label>
     <input type="text" id="Password" ref="Password" />
     <button @click="Signup">Sign Up</button>
-    <p>
-      rest1@gmail.com restaurant1 north 999-999-9999 best testaurant1 Vancouver
-      password1
-    </p>
-    <p>
-      https://images.pexels.com/photos/16014517/pexels-photo-16014517.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load
-    </p>
-    <p>
-      https://images.pexels.com/photos/13542947/pexels-photo-13542947.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load
-    </p>
   </div>
 </template>
 
@@ -70,7 +60,7 @@ export default {
         .then((response) => {
           response;
           cookies.set(`token`, response.data.token);
-          cookies.set(`restaurant_id`, response.data.client_id);
+          cookies.set(`restaurant_id`, response.data.restaurantId);
           console.log(response);
         })
         .catch((error) => {
