@@ -5,7 +5,7 @@
       <img width="200px" :src="profile_url" alt="restaurant profile picture" />
       <h1>{{ city }}</h1>
       <h3>INFO</h3>
-      <p>address: {{ address }}</p>
+      <p>address: {{ address }} {{ city }}</p>
       <p>Email: {{ email }}</p>
       <p>id: {{ restaurant_id }}</p>
       <p>phone: {{ phone }}</p>
@@ -50,7 +50,6 @@ export default {
         },
       })
       .then((response) => {
-        console.log(response);
         this.email = response.data[0].email;
         this.name = response.data[0].name;
         this.address = response.data[0].address;
