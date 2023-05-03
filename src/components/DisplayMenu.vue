@@ -34,17 +34,17 @@ export default {
 
     addtocart(details) {
       let itemId = details.currentTarget.attributes[1].value;
-      let itemParse = JSON.parse(itemId);
       let restId = details.currentTarget.attributes[2].value;
       let getItems = cookies.get(`order`);
-      let getItemsParse = JSON.parse(getItems);
 
-      getItemsParse;
-      itemParse;
-      getItems;
-      restId;
-      itemId;
-      cookies;
+      if (getItems == null) {
+        cookies.set(`order`, { menu_items: itemId, restaurant_id: restId });
+      } else {
+        let MenuItems = getItems.menu_items;
+        let order = [MenuItems];
+        order.push(itemId);
+        cookies.set(`order`, { menu_items: order, restaurant_id: restId });
+      }
     },
   },
   mounted() {
