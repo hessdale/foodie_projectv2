@@ -22,13 +22,12 @@ import cookies from "vue-cookies";
 export default {
   data() {
     return {
-      menus: undefined,
+      menu: undefined,
       restaurants: undefined,
     };
   },
   methods: {
     viewmenu(details) {
-      console.log(details);
       let ID = details.srcElement.attributes[1].value;
       let IDparse = JSON.parse(ID);
       axios
@@ -43,9 +42,8 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
-          this.menus = response.data;
-          this.$root.$emit(`menu_data`, this.menus);
+          this.menu = response.data;
+          this.$root.$emit(`menu_data`, this.menu);
         })
         .catch((error) => {
           console.log(error);
@@ -63,9 +61,7 @@ export default {
         },
       })
       .then((response) => {
-        console.log(response);
         this.restaurants = response.data;
-        console.log(this.restaurants);
       })
       .catch((error) => {
         console.log(error);

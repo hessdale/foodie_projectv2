@@ -27,6 +27,7 @@ export default {
       let image_url = this.$refs.imageURL[`value`];
       let name = this.$refs.name[`value`];
       let price = this.$refs.price[`value`];
+      let priceJson = JSON.parse(price);
       let restauranttoken = cookies.get(`token`);
 
       axios
@@ -41,7 +42,7 @@ export default {
             description: description,
             image_url: image_url,
             name: name,
-            price: price,
+            price: priceJson,
           },
         })
         .then((response) => {

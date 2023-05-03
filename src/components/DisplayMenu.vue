@@ -1,14 +1,12 @@
 <template>
   <div>
-    <div v-if="(menus = undefined)">
-      <h3>please select a menu</h3>
-    </div>
-    <div v-else>
-      <section v-for="(menu, i) in menus" :key="i">
-        <h3>{{ menu[i].name }}</h3>
-        <img :src="menu[i].image_url" :alt="menu[i].description" />
-        <p>{{ menu[i].description }}</p>
-        <h4>{{ menu[i].price }}</h4>
+    <div>
+      <section v-for="item in items" :key="item.id">
+        <h3>{{ item.name }}</h3>
+        <img width="100px" :src="item.image_url" :alt="item.description" />
+        <p>{{ item.description }}</p>
+        <h4>{{ item.price }}</h4>
+        <button @click="addtocart">order</button>
       </section>
     </div>
   </div>
@@ -18,12 +16,12 @@
 export default {
   data() {
     return {
-      menus: undefined,
+      items: undefined,
     };
   },
   methods: {
     menuinfo(details) {
-      this.menus = details;
+      this.items = details;
       console.log(details);
     },
   },
