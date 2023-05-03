@@ -5,6 +5,7 @@ import ClientLoginPage from '../views/ClientLoginPage'
 import ClientProfilePage from '../views/ClientProfilePage'
 import RestaurantLoginPage from '../views/RestaurantLoginPage.vue'
 import RestaurantProfilePage from '../views/RestaurantProfilePage.vue'
+import DiscoverPage from '../views/DiscoverPage.vue'
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,11 @@ const routes = [
     path: `/restaurantprofile`,
     name: `restaurant profile`,
     component: RestaurantProfilePage
+  },
+  {
+    path: `/discover`,
+    name: `discover restaurants`,
+    component: DiscoverPage
   }
 ]
 

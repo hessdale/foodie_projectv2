@@ -35,7 +35,6 @@ export default {
     };
   },
   mounted() {
-    // get existing user info with id figure out how to pass number on request not string
     let restaurantId = cookies.get(`restaurant_id`);
     let restaurantJson = JSON.parse(restaurantId);
     axios

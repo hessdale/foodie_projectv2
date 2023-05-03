@@ -7,6 +7,7 @@
       <router-link to="/clientprofile">clientprofile</router-link> |
       <router-link to="/restaurantlogin">restaurantlogin</router-link> |
       <router-link to="/restaurantprofile">restaurantProfile</router-link> |
+      <router-link to="/discover">discover</router-link> |
     </nav>
     <router-view />
   </div>

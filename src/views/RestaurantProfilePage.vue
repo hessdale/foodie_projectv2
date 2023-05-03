@@ -1,6 +1,7 @@
 <template>
   <div>
     <restaurant-profile></restaurant-profile>
+    <new-menu></new-menu>
     <button @click="editstatus">edit profile</button>
     <section v-if="edit === true">
       <label for="Email">Email: </label>
@@ -50,6 +51,7 @@
 import RestaurantProfile from "@/components/RestaurantProfile.vue";
 import cookies from "vue-cookies";
 import axios from "axios";
+import NewMenu from "@/components/NewMenu.vue";
 
 export default {
   methods: {
@@ -321,6 +323,7 @@ export default {
   },
   components: {
     RestaurantProfile,
+    NewMenu,
   },
 };
 </script>
