@@ -6,6 +6,7 @@ import ClientProfilePage from '../views/ClientProfilePage'
 import RestaurantLoginPage from '../views/RestaurantLoginPage.vue'
 import RestaurantProfilePage from '../views/RestaurantProfilePage.vue'
 import DiscoverPage from '../views/DiscoverPage.vue'
+import CheckoutPage from '../views/CheckoutPage.vue'
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes = [
     path: `/discover`,
     name: `discover restaurants`,
     component: DiscoverPage
+  },
+  {
+    path: `/checkout`,
+    name: `checkout`,
+    component: CheckoutPage
   }
 ]
 

@@ -38,11 +38,15 @@ export default {
       let getItems = cookies.get(`order`);
 
       if (getItems == null) {
-        cookies.set(`order`, { menu_items: itemId, restaurant_id: restId });
+        cookies.set(`order`, { menu_items: [itemId], restaurant_id: restId });
       } else {
-        let MenuItems = getItems.menu_items;
-        let order = [MenuItems];
+        let menuItems = getItems.menu_items;
+
+        let order = menuItems;
+
         order.push(itemId);
+        this.cart = order;
+
         cookies.set(`order`, { menu_items: order, restaurant_id: restId });
       }
     },

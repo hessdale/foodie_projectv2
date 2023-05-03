@@ -8,6 +8,7 @@
       <router-link to="/restaurantlogin">restaurantlogin</router-link> |
       <router-link to="/restaurantprofile">restaurantProfile</router-link> |
       <router-link to="/discover">discover</router-link> |
+      <router-link to="/checkout">checkout</router-link> |
     </nav>
     <router-view />
   </div>
@@ -32,6 +33,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #4a7964;
 }
 </style>
