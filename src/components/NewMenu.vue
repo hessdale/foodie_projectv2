@@ -22,18 +22,19 @@ export default {
   methods: {
     newItem(details) {
       details;
-      let restauranttoken = cookies.get(`token`);
-      let restaurantJson = JSON.parse(restauranttoken);
+
       let description = this.$refs.description[`value`];
-      let image_url = this.$refs.image_url[`value`];
+      let image_url = this.$refs.imageURL[`value`];
       let name = this.$refs.name[`value`];
       let price = this.$refs.price[`value`];
+      let restauranttoken = cookies.get(`token`);
+
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/menu`,
           headers: {
             "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: restaurantJson,
+            token: restauranttoken,
           },
           method: `POST`,
           data: {
