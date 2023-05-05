@@ -483,7 +483,11 @@ Note that the token is sent as a header.
 },
 ```
 
-**No Data Returned**
+**Data Returned**
+
+```
+Number representing the menu_item_id just created
+```
 
 <br>
 <br>
