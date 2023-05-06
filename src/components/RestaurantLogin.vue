@@ -34,6 +34,7 @@ export default {
           cookies.set(`token`, response.data.token);
           cookies.set(`restaurant_id`, response.data.restaurant_id);
           console.log(response);
+          cookies.set(`client_id`, undefined);
         })
         .catch((error) => {
           error;

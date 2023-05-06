@@ -44,11 +44,13 @@
       <input type="text" id="passdel" ref="password" />
       <button @click="deleteAccount">DELETE ACCOUNT</button>
     </section>
+    <restaurant-menu></restaurant-menu>
   </div>
 </template>
 
 <script>
 import RestaurantProfile from "@/components/RestaurantProfile.vue";
+import RestaurantMenu from "@/components/RestaurantMenu.vue";
 import cookies from "vue-cookies";
 import axios from "axios";
 import NewMenu from "@/components/NewMenu.vue";
@@ -324,6 +326,7 @@ export default {
   components: {
     RestaurantProfile,
     NewMenu,
+    RestaurantMenu,
   },
 };
 </script>
