@@ -3,7 +3,11 @@
     <h1>Edit Menu Items</h1>
     <div v-for="menuItem in menuItems" :key="menuItem.id">
       <h2>{{ menuItem.name }}</h2>
-
+      <img
+        :src="menuItem.image_url"
+        :alt="menuItem.description"
+        width="100px"
+      />
       <input
         type="text"
         :placeholder="menuItem.description"
@@ -25,6 +29,7 @@
         :ref="`price` + menuItem.id"
       />
       <button @click="sendEdit" :itemId="menuItem.id">confirm edit</button>
+      <button @click="deleteItem" :itemId="menuItem.id">DELETE ITEM</button>
     </div>
   </div>
 </template>
@@ -34,6 +39,32 @@ import axios from "axios";
 import cookies from "vue-cookies";
 export default {
   methods: {
+    deleteItem(details) {
+      details;
+      let id = details.currentTarget.attributes[1].value;
+      let idParse = JSON.parse(id);
+      let token = cookies.get(`token`);
+      axios
+        .request({
+          url: `https://foodie.bymoen.codes/api/menu`,
+
+          headers: {
+            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
+            token: token,
+          },
+          data: {
+            menu_id: idParse,
+          },
+
+          method: `DELETE`,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     sendEdit(details) {
       details;
       let currentId = details.target.attributes[1].value;
