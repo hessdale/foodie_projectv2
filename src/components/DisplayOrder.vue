@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div v-if="this.orders == null">
+      <p>please make an order</p>
+    </div>
     <section v-for="(order, i) in orders" :key="i">
       <h2>{{ order.name }}</h2>
       <h5>{{ order.price }}</h5>

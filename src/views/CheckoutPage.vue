@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div v-if="this.carts == undefined">
-      <p>please make an order</p>
-    </div>
-    <div v-else>
+    <div>
       <section v-for="cart in carts" :key="cart.itemId">
         <h3>{{ cart.itemName }}</h3>
         <img width="100px" :src="cart.itemImg" :alt="cart.description" />
@@ -13,6 +10,7 @@
     </div>
     <button @click="order">order</button>
     <button @click="clear">clear cart</button>
+    <button @click="checkCart">check</button>
   </div>
 </template>
 
@@ -21,6 +19,9 @@ import cookies from "vue-cookies";
 import axios from "axios";
 export default {
   methods: {
+    checkCart() {
+      console.log(this.carts);
+    },
     clear(details) {
       details;
       this.carts = undefined;
@@ -33,7 +34,6 @@ export default {
       for (let i = 0; i < this.carts.length; i++) {
         menu_items.push(this.carts[i].itemId);
       }
-
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/client-order`,
@@ -68,15 +68,12 @@ export default {
         });
     },
   },
-  //bug even though I have carts undefined after order is sent it still goes through the
-  //loop in the html
   data() {
     return {
-      carts: undefined,
+      carts: cookies.get(`order`),
     };
   },
   mounted() {
-    this.carts = cookies.get(`order`);
     console.log(this.carts);
   },
 };

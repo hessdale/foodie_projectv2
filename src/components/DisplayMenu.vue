@@ -47,13 +47,22 @@ export default {
       let itemDesc = details.currentTarget.attributes[5].value;
       let itemPrice = details.currentTarget.attributes[6].value;
       let getItems = cookies.get(`order`);
-
-      itemImg;
-      itemName;
-      itemDesc;
-      itemPrice;
-
-      if (getItems == null) {
+      if (getItems == "undefined") {
+        getItems = undefined;
+      } else {
+        getItems = cookies.get(`order`);
+      }
+      if (getItems != undefined) {
+        getItems.push({
+          description: itemDesc,
+          itemId: itemId,
+          itemImg: itemImg,
+          itemName: itemName,
+          itemPrice: itemPrice,
+          restaurant_id: restId,
+        });
+        cookies.set(`order`, getItems);
+      } else {
         cookies.set(`order`, [
           {
             description: itemDesc,
@@ -64,17 +73,7 @@ export default {
             restaurant_id: restId,
           },
         ]);
-      } else {
-        let order = getItems;
-        order.push({
-          description: itemDesc,
-          itemId: itemId,
-          itemImg: itemImg,
-          itemName: itemName,
-          itemPrice: itemPrice,
-          restaurant_id: restId,
-        });
-        cookies.set(`order`, order);
+        console.log(getItems);
       }
     },
   },
