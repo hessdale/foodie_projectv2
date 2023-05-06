@@ -43,8 +43,6 @@ export default {
         })
         .then((response) => {
           this.menu = response.data;
-          this.$root.$emit(`restaurant_id`, IDparse);
-          this.$root.$emit(`menu_data`, this.menu);
         })
         .catch((error) => {
           console.log(error);

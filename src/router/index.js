@@ -7,6 +7,7 @@ import RestaurantLoginPage from '../views/RestaurantLoginPage.vue'
 import RestaurantProfilePage from '../views/RestaurantProfilePage.vue'
 import DiscoverPage from '../views/DiscoverPage.vue'
 import CheckoutPage from '../views/CheckoutPage.vue'
+import OrdersPage from '../views/OrdersPage.vue'
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,10 @@ const routes = [
     path: `/checkout`,
     name: `checkout`,
     component: CheckoutPage
+  }, {
+    path: `/orders`,
+    name: `orders`,
+    component: OrdersPage
   }
 ]
 

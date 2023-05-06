@@ -9,6 +9,7 @@
       <router-link to="/restaurantprofile">restaurantProfile</router-link> |
       <router-link to="/discover">discover</router-link> |
       <router-link to="/checkout">checkout</router-link> |
+      <router-link to="/orders">orders</router-link>
     </nav>
     <router-view />
   </div>

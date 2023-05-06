@@ -1,11 +1,16 @@
 <template>
   <div>
-    <section v-for="cart in carts" :key="cart.itemId">
-      <h3>{{ cart.itemName }}</h3>
-      <img width="100px" :src="cart.itemImg" :alt="cart.description" />
-      <p>{{ cart.description }}</p>
-      <h4>${{ cart.itemPrice }}</h4>
-    </section>
+    <div v-if="this.carts == undefined">
+      <p>please make an order</p>
+    </div>
+    <div v-else>
+      <section v-for="cart in carts" :key="cart.itemId">
+        <h3>{{ cart.itemName }}</h3>
+        <img width="100px" :src="cart.itemImg" :alt="cart.description" />
+        <p>{{ cart.description }}</p>
+        <h4>${{ cart.itemPrice }}</h4>
+      </section>
+    </div>
     <button @click="order">order</button>
     <button @click="clear">clear cart</button>
   </div>
@@ -63,6 +68,8 @@ export default {
         });
     },
   },
+  //bug even though I have carts undefined after order is sent it still goes through the
+  //loop in the html
   data() {
     return {
       carts: undefined,
@@ -70,6 +77,7 @@ export default {
   },
   mounted() {
     this.carts = cookies.get(`order`);
+    console.log(this.carts);
   },
 };
 </script>
