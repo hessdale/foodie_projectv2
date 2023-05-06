@@ -37,32 +37,36 @@ export default {
     sendEdit(details) {
       details;
       let currentId = details.target.attributes[1].value;
-      let params = [];
-      if (this.$refs[`description` + currentId].value != undefined) {
-        let descValue = this.$refs[`description` + currentId].value;
-        params.push({ description: descValue });
+      let idParse = JSON.parse(currentId);
+      let params = { menu_id: idParse };
+      if (this.$refs[`description` + currentId][0].value != ``) {
+        let descValue = this.$refs[`description` + currentId][0].value;
+        params[`description`] = descValue;
       }
-      if (this.$refs[`imageUrl` + currentId].value != undefined) {
-        let imgValue = this.$refs[`imageUrl` + currentId].value;
-        params.push({ image_url: imgValue });
+      if (this.$refs[`imageUrl` + currentId][0].value != ``) {
+        let imgValue = this.$refs[`imageUrl` + currentId][0].value;
+        params[`image_url`] = imgValue;
       }
-      if (this.$refs[`name` + currentId].value != undefined) {
-        let nameValue = this.$refs[`name` + currentId].value;
-        params.push({ name: nameValue });
+      if (this.$refs[`name` + currentId][0].value != ``) {
+        let nameValue = this.$refs[`name` + currentId][0].value;
+        params[`name`] = nameValue;
       }
-      if (this.$refs[`name` + currentId].value != undefined) {
-        let priceValue = this.$refs[`price` + currentId].value;
-        params.push({ price: priceValue });
+      if (this.$refs[`price` + currentId][0].value != ``) {
+        let priceValue = this.$refs[`price` + currentId][0].value;
+        let priceParse = JSON.parse(priceValue);
+        params[`price`] = priceParse;
       }
+
+      let token = cookies.get(`token`);
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/menu`,
           headers: {
             "x-api-key": `H0x7V93WN4ebcatCvCI3`,
+            token: token,
           },
-          params: {
-            restaurant_id: cookies.get(`restaurant_id`),
-          },
+          data: params,
+
           method: `PATCH`,
         })
         .then((response) => {
