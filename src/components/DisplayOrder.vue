@@ -17,25 +17,46 @@ export default {
   data() {
     return {
       orders: undefined,
+      restaurant_id: cookies.get(`restaurant_id`),
+      client_id: cookies.get(`client_id`),
     };
   },
   mounted() {
-    axios
-      .request({
-        url: `https://foodie.bymoen.codes/api/client-order`,
-        headers: {
-          "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-          token: cookies.get(`token`),
-        },
-        method: `GET`,
-      })
-      .then((response) => {
-        console.log(response);
-        this.orders = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (this.client_id != undefined) {
+      axios
+        .request({
+          url: `https://foodie.bymoen.codes/api/client-order`,
+          headers: {
+            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
+            token: cookies.get(`token`),
+          },
+          method: `GET`,
+        })
+        .then((response) => {
+          console.log(response);
+          this.orders = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (this.restaurant_id != undefined) {
+      axios
+        .request({
+          url: `https://foodie.bymoen.codes/api/restaurant-order`,
+          headers: {
+            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
+            token: cookies.get(`token`),
+          },
+          method: `GET`,
+        })
+        .then((response) => {
+          console.log(response);
+          this.orders = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   },
 };
 </script>

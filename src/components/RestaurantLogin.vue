@@ -20,7 +20,7 @@ export default {
       let password = this.$refs.userPassword[`value`];
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/client-login`,
+          url: `https://foodie.bymoen.codes/api/restaurant-login`,
           headers: {
             "x-api-key": `H0x7V93WN4ebcatCvCI3`,
           },
@@ -32,7 +32,8 @@ export default {
         })
         .then((response) => {
           cookies.set(`token`, response.data.token);
-          cookies.set(`client_id`, response.data.client_id);
+          cookies.set(`restaurant_id`, response.data.restaurant_id);
+          console.log(response);
         })
         .catch((error) => {
           error;

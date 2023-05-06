@@ -60,7 +60,7 @@ export default {
         .then((response) => {
           response;
           cookies.set(`token`, response.data.token);
-          cookies.set(`restaurant_id`, response.data.restaurantId);
+          cookies.set(`restaurant_id`, response.data.restaurant_id);
           console.log(response);
         })
         .catch((error) => {
