@@ -1,6 +1,7 @@
 <template>
   <div>
     <section v-if="this.restaurant_id != undefined">
+      <button @click="logout"></button>
       <h1>Welcome, {{ name }}</h1>
       <img width="200px" :src="profile_url" alt="restaurant profile picture" />
       <h1>{{ city }}</h1>
@@ -21,6 +22,13 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
+  methods: {
+    logout() {
+      cookies.set(`token`, undefined);
+      cookies.set(`client_id`, undefined);
+      cookies.set(`restaurant_id`, undefined);
+    },
+  },
   data() {
     return {
       email: undefined,
