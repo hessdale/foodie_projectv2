@@ -75,11 +75,15 @@ export default {
       carts: cookies.get(`order`),
     };
   },
-  mounted() {
-    console.log(this.carts);
-  },
 };
 </script>
 
 <style scoped>
+div {
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
 </style>

@@ -18,4 +18,12 @@ export default {
 </script>
 
 <style scoped>
+div {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
 </style>
