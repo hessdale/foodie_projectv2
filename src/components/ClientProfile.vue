@@ -25,6 +25,7 @@ export default {
       cookies.set(`token`, undefined);
       cookies.set(`client_id`, undefined);
       cookies.set(`restaurant_id`, undefined);
+      location.reload();
     },
   },
   data() {
@@ -39,7 +40,6 @@ export default {
     };
   },
   mounted() {
-    // get existing user info with id figure out how to pass number on request not string
     let clientId = cookies.get(`client_id`);
     let clientjson = JSON.parse(clientId);
     axios

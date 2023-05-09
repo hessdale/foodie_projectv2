@@ -1,15 +1,18 @@
 <template>
   <div>
-    <display-order></display-order>
+    <client-display-order></client-display-order>
+    <restaurant-display-order></restaurant-display-order>
   </div>
 </template>
 
 <script>
-import DisplayOrder from "@/components/DisplayOrder.vue";
+import ClientDisplayOrder from "@/components/ClientDisplayOrder.vue";
+import RestaurantDisplayOrder from "@/components/RestaurantDisplayOrder.vue";
 
 export default {
   components: {
-    DisplayOrder,
+    ClientDisplayOrder,
+    RestaurantDisplayOrder,
   },
 };
 </script>

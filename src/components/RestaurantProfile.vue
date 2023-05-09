@@ -1,7 +1,7 @@
 <template>
   <div>
     <section v-if="this.restaurant_id != undefined">
-      <button @click="logout"></button>
+      <button @click="logout">LOGOUT</button>
       <h1>Welcome, {{ name }}</h1>
       <img width="200px" :src="profile_url" alt="restaurant profile picture" />
       <h1>{{ city }}</h1>

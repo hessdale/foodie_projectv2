@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-if="this.orders == null">
-      <p>please make an order</p>
-    </div>
+    <div v-if="this.orders == null"></div>
     <section v-for="(order, i) in orders" :key="i">
       <h2>{{ order.name }}</h2>
       <h5>{{ order.price }}</h5>
@@ -17,7 +15,7 @@ export default {
   data() {
     return {
       orders: undefined,
-      restaurant_id: cookies.get(`restaurant_id`),
+
       client_id: cookies.get(`client_id`),
     };
   },
@@ -35,27 +33,13 @@ export default {
         .then((response) => {
           console.log(response);
           this.orders = response.data;
+          console.log(this.orders);
         })
         .catch((error) => {
           console.log(error);
         });
-    } else if (this.restaurant_id != undefined) {
-      axios
-        .request({
-          url: `https://foodie.bymoen.codes/api/restaurant-order`,
-          headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: cookies.get(`token`),
-          },
-          method: `GET`,
-        })
-        .then((response) => {
-          console.log(response);
-          this.orders = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    } else {
+      console.log(`please log in`);
     }
   },
 };
