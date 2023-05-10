@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- form for user to register -->
     <label for="Email">Email: </label>
     <input type="text" id="Email" ref="userEmail" />
     <label for="FirstName">First Name: </label>
@@ -21,14 +22,15 @@ import axios from "axios";
 import cookies from "vue-cookies";
 export default {
   methods: {
-    Signup(details) {
-      details;
+    Signup() {
+      //gets values from the form
       let email = this.$refs.userEmail[`value`];
       let firstName = this.$refs.userFirstName[`value`];
       let lastName = this.$refs.userLastName[`value`];
       let pfp = this.$refs.userPfp[`value`];
       let username = this.$refs.userUsername[`value`];
       let password = this.$refs.userPassword[`value`];
+      //post axios request to make a new account
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/client`,
@@ -46,12 +48,13 @@ export default {
           },
         })
         .then((response) => {
+          //sets cookies for client_id and token then reloads the page and displays success message
           cookies.set(`token`, response.data.token);
           cookies.set(`client_id`, response.data.client_id);
-          location.reload();
           document
             .querySelector(`div`)
             .insertAdjacentHTML(`beforebegin`, `<h3>Creation Successful</h3>`);
+          location.reload();
         })
         .catch((error) => {
           console.log(error);

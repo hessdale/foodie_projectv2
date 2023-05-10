@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- loops through restaurants array to display -->
     <div v-for="(restaurant, i) in restaurants" :key="i">
       <h1>{{ restaurant[`name`] }}</h1>
       <img
@@ -18,7 +19,7 @@
 
 <script>
 import axios from "axios";
-import cookies from "vue-cookies";
+
 export default {
   data() {
     return {
@@ -28,6 +29,7 @@ export default {
   },
   methods: {
     viewmenu(details) {
+      //gets value from attribute set by loop above  and uses it in a get request
       let ID = details.srcElement.attributes[1].value;
       let IDparse = JSON.parse(ID);
       axios
@@ -42,7 +44,9 @@ export default {
           },
         })
         .then((response) => {
+          //displays menu of restaurant that was selected
           this.menu = response.data;
+          //emits menu data and restaurant ID
           this.$root.$emit(`menu_data`, this.menu);
           this.$root.$emit(`restaurant_id`, ID);
         })
@@ -53,7 +57,7 @@ export default {
   },
 
   mounted() {
-    cookies;
+    //axios request to display the restaurants above
     axios
       .request({
         url: `https://foodie.bymoen.codes/api/restaurants`,
@@ -62,6 +66,7 @@ export default {
         },
       })
       .then((response) => {
+        //sets local variable to response data
         this.restaurants = response.data;
       })
       .catch((error) => {

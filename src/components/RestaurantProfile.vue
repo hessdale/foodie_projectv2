@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- only displays section with restaurant data if restaurant id is anything but undefined -->
     <section v-if="this.restaurant_id != undefined">
       <button @click="logout">LOGOUT</button>
       <h1>Welcome, {{ name }}</h1>
@@ -24,9 +25,11 @@ import cookies from "vue-cookies";
 export default {
   methods: {
     logout() {
+      //sets cookies to undefined for logged in cookies and reload page
       cookies.set(`token`, undefined);
       cookies.set(`client_id`, undefined);
       cookies.set(`restaurant_id`, undefined);
+      location.reload();
     },
   },
   data() {
@@ -43,8 +46,10 @@ export default {
     };
   },
   mounted() {
+    //getting restaurant Id and parsing it
     let restaurantId = cookies.get(`restaurant_id`);
     let restaurantJson = JSON.parse(restaurantId);
+    //axios request to get restaurant data
     axios
       .request({
         url: `https://foodie.bymoen.codes/api/restaurant`,
@@ -57,6 +62,7 @@ export default {
         },
       })
       .then((response) => {
+        //setting local variables of data
         this.email = response.data[0].email;
         this.name = response.data[0].name;
         this.address = response.data[0].address;

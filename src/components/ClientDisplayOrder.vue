@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- loops through orders and items to display on page -->
     <div v-if="this.orders == null"></div>
     <div v-for="(order, i) in orders" :key="i">
       <h1>order ID:{{ order[0].order_id }}</h1>
@@ -20,31 +21,38 @@ import cookies from "vue-cookies";
 export default {
   data() {
     return {
+      //defining unsorted orders as undefined
       unsorted_orders: undefined,
-      client_id: cookies.get(`client_id`),
+      //setting orders to undefined
       orders: undefined,
     };
   },
   methods: {
+    //method used to sort orders and ids into array with info from axios request
     sort_orders(unsorted_orders) {
       let order_ids = [];
       let sorted_orders = [];
+      //for loop going through unsorted orders array
       for (let i = 0; i < unsorted_orders.length; i++) {
+        //using findIndex to find other order ids that are the smae
         let index = order_ids.findIndex(
           (order_id) => order_id === unsorted_orders[i].order_id
         );
+        //if index returns -1 it means that there is the same id in the array already and will push into that array
         if (index !== -1) {
           sorted_orders[index].push(unsorted_orders[i]);
+          //if not it means there are no matches and it pushes to the end of the array and makes a new one
         } else {
           sorted_orders.push([unsorted_orders[i]]);
           order_ids.push(unsorted_orders[i].order_id);
         }
       }
+      //defines this.orders as the sorted array from the loop
       this.orders = sorted_orders;
-      console.log(this.orders);
     },
   },
   mounted() {
+    // if client_id is anything but undefined then it runs this axios request
     if (this.client_id != undefined) {
       axios
         .request({
@@ -56,7 +64,7 @@ export default {
           method: `GET`,
         })
         .then((response) => {
-          console.log(response);
+          //sends the response to function of sort_orders
           this.sort_orders(response.data);
         })
         .catch((error) => {

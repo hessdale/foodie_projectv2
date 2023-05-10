@@ -1,26 +1,19 @@
 <template>
   <div>
+    <!-- toggle button for edit form -->
     <button @click="editstatus">edit profile</button>
     <section v-if="edit === true">
       <input type="text" ref="Email" placeholder="Change Email" />
-
       <input type="text" ref="Name" placeholder="Change Restaurant Name" />
-
       <input type="text" ref="Address" placeholder="Change Address" />
-
       <input type="text" ref="Number" placeholder="Change Phone Number" />
-
       <input type="text" ref="Bio" placeholder="Change Bio" />
-
       <input type="text" ref="City" placeholder="Change City" />
-
       <input type="text" ref="Profile" placeholder="Change Profile Pic (url)" />
-
       <input type="text" ref="Banner" placeholder="Change Banner Pic (url)" />
-
       <input type="text" ref="UserPassword" placeholder="Change Password" />
       <button @click="sendEdit">Change Account Info</button>
-
+      <!-- form for account deletion -->
       <input
         type="text"
         ref="password"
@@ -36,8 +29,9 @@ import cookies from "vue-cookies";
 import axios from "axios";
 export default {
   methods: {
-    sendEdit(details) {
-      details;
+    //function to edit account info
+    sendEdit() {
+      //builds params based on what user inputs on the form
       let params = {};
       if (this.$refs[`Email`].value != ``) {
         let emailValue = this.$refs[`Email`].value;
@@ -75,9 +69,9 @@ export default {
         let userPassword = this.$refs[`UserPassword`].value;
         params[`password`] = userPassword;
       }
-
+      //defines token cookie
       let cookietoken = cookies.get(`token`);
-
+      //axios request using the params built by ifs above
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/restaurant`,
@@ -88,18 +82,23 @@ export default {
           method: `PATCH`,
           data: params,
         })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          //sends success message and reloads pages
+          document
+            .querySelector(`section`)
+            .insertAdjacentHTML(`beforeend`, `<h3>creation successful</h3>`);
+          location.reload();
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    //
+    //function to delete account
     deleteAccount() {
+      //variables for password and token
       let password = this.$refs.password[`value`];
       let cookietoken = cookies.get(`token`);
-
+      //axios request for delete
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/restaurant`,
@@ -112,17 +111,17 @@ export default {
             password: password,
           },
         })
-        .then((response) => {
-          response;
+        .then(() => {
+          //sets all login cookies for restaurant to undefined and reloads the page
           cookies.set(`token`, undefined);
           cookies.set(`restaurant_id`, undefined);
-          console.log(response);
+          location.reload();
         })
         .catch((error) => {
-          error;
           console.log(error);
         });
     },
+    //toggle for edit form
     editstatus() {
       if (this.edit == false) {
         this.edit = true;

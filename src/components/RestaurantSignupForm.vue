@@ -1,24 +1,22 @@
 <template>
   <div>
-    <label for="Email">Email: </label>
-    <input type="text" id="Email" ref="Email" />
-    <label for="tName">Name: </label>
-    <input type="text" id="Name" ref="Name" />
-    <label for="Address">Address: </label>
-    <input type="text" id="Address" ref="Address" />
-    <label for="Phone">Phone #: </label>
-    <input type="text" id="Phone" ref="Phone" />
-    <label for="Bio">Bio: </label>
-    <input type="text" id="Bio" ref="Bio" />
-    <label for="City">City: </label>
-    <input type="text" id="City" ref="City" />
-    <label for="Profile">Profile: </label>
-    <input type="text" id="Profile" ref="Profile" />
-    <label for="Banner">Banner: </label>
-    <input type="text" id="Banner" ref="Banner" />
-    <label for="Password">Password: </label>
-    <input type="text" id="Password" ref="Password" />
-    <button @click="Signup">Sign Up</button>
+    <!-- form for user to sign up with a restaurant -->
+    <section>
+      <input type="text" ref="Email" placeholder="Email" />
+      <input type="text" ref="Name" placeholder="Name" />
+      <input type="text" ref="Address" placeholder="Address" />
+      <input type="text" ref="Phone" placeholder="Phone ###-###-####" />
+      <input type="text" ref="Bio" placeholder="Bio" />
+      <input
+        type="text"
+        ref="City"
+        placeholder="City Vancouver/Toronto/Calgary"
+      />
+      <input type="text" ref="Profile" placeholder="Profile" />
+      <input type="text" ref="Banner" placeholder="Banner" />
+      <input type="text" ref="Password" placeholder="Password" />
+      <button @click="Signup">Sign Up</button>
+    </section>
   </div>
 </template>
 
@@ -27,6 +25,7 @@ import axios from "axios";
 import cookies from "vue-cookies";
 export default {
   methods: {
+    //signup function that takes values that user input from the form and
     Signup(details) {
       details;
       let email = this.$refs.Email[`value`];
@@ -38,6 +37,7 @@ export default {
       let profile = this.$refs.Profile[`value`];
       let banner = this.$refs.Banner[`value`];
       let password = this.$refs.Password[`value`];
+      //axios request with values from form
       axios
         .request({
           url: `https://foodie.bymoen.codes/api/restaurant`,
@@ -49,22 +49,25 @@ export default {
             email: email,
             name: name,
             address: address,
-            phone_number: phone, //(string in the form of ###-###-####),
+            phone_number: phone,
             bio: bio,
-            city: city, //string, one of Calgary, Vancouver or Toronto
+            city: city,
             profile_url: profile,
             banner_url: banner,
             password: password,
           },
         })
         .then((response) => {
-          response;
+          //sets cookies to user being logged in and logsout of client account if one displays success message and reloads page
           cookies.set(`token`, response.data.token);
           cookies.set(`restaurant_id`, response.data.restaurant_id);
-          console.log(response);
+          cookies.set(`client_id`, undefined);
+          document
+            .querySelector(`section`)
+            .insertAdjacentHTML(`beforeend`, `<h3>creation successful</h3>`);
+          location.reload();
         })
         .catch((error) => {
-          error;
           console.log(error);
         });
     },

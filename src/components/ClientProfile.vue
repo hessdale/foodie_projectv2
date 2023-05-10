@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- only displays if id is not undefined -->
     <section v-if="this.id != undefined">
       <button @click="logout">LOGOUT</button>
       <h1>Welcome, {{ first_name }} {{ last_name }}</h1>
@@ -21,6 +22,7 @@ import axios from "axios";
 import cookies from "vue-cookies";
 export default {
   methods: {
+    //function to log user out and set all affiliated cookies to undefined and reloads the page
     logout() {
       cookies.set(`token`, undefined);
       cookies.set(`client_id`, undefined);
@@ -30,6 +32,7 @@ export default {
   },
   data() {
     return {
+      //sets all used data to undefined for display
       created_at: undefined,
       email: undefined,
       first_name: undefined,
@@ -40,8 +43,10 @@ export default {
     };
   },
   mounted() {
+    //gets client id from cookies and parses it
     let clientId = cookies.get(`client_id`);
     let clientjson = JSON.parse(clientId);
+    //get request to recieve data for profile
     axios
       .request({
         url: `https://foodie.bymoen.codes/api/client`,
@@ -54,6 +59,7 @@ export default {
         },
       })
       .then((response) => {
+        //sets data to local variables
         this.created_at = response.data[0].created_at;
         this.email = response.data[0].email;
         this.first_name = response.data[0].first_name;

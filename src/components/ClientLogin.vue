@@ -1,10 +1,13 @@
 <template>
   <div>
-    <label for="email">Email</label>
-    <input type="text" id="email" ref="userEmail" />
-    <label for="password">Password</label>
-    <input type="text" id="password" ref="userPassword" />
-    <button @click="login">Log in</button>
+    <section>
+      <!-- form for log in -->
+      <label for="email">Email</label>
+      <input type="text" id="email" ref="userEmail" />
+      <label for="password">Password</label>
+      <input type="text" id="password" ref="userPassword" />
+      <button @click="login">Log in</button>
+    </section>
   </div>
 </template>
 
@@ -12,14 +15,10 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
-  data() {
-    return {
-      logged_in: cookies.get(`token`),
-    };
-  },
   methods: {
     login(details) {
       details;
+      //gets value of email and password for use in api request
       let email = this.$refs.userEmail[`value`];
       let password = this.$refs.userPassword[`value`];
       axios
@@ -35,18 +34,22 @@ export default {
           },
         })
         .then((response) => {
+          //sets cookies token/client_id/restaurant_id
           cookies.set(`token`, response.data.token);
           cookies.set(`client_id`, response.data.client_id);
           cookies.set(`restaurant_id`, undefined);
-          location.reload();
+          //inserts success message
           document
-            .querySelector(`div`)
+            .querySelector(`section`)
             .insertAdjacentHTML(`beforebegin`, `<h3>Login Successful</h3>`);
+          location.reload();
         })
         .catch(() => {
+          //inserts failure message
           document
-            .querySelector(`div`)
-            .insertAdjacentHTML(`beforebegin`, `<h3>Login Failes</h3>`);
+            .querySelector(`section`)
+            .insertAdjacentHTML(`beforebegin`, `<h3>Login Failed</h3>`);
+          location.reload();
         });
     },
   },
