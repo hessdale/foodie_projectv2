@@ -3,8 +3,8 @@
     <div v-if="this.orders == null"></div>
     <div v-for="(order, i) in orders" :key="i">
       <h1>order ID:{{ order[0].order_id }}</h1>
-      <button @click="confirmed" :orderId="order.order_id">Confirmed</button>
-      <button @click="completed" :orderId="order.order_id">Complete</button>
+      <button @click="confirmed" :orderId="order[0].order_id">Confirmed</button>
+      <button @click="completed" :orderId="order[0].order_id">Complete</button>
       <section v-for="(item, q) in order" :key="q">
         <h2>{{ item.name }}</h2>
         <h5>${{ item.price }}</h5>
@@ -20,7 +20,7 @@ import cookies from "vue-cookies";
 export default {
   methods: {
     confirmed(details) {
-      let Id = details.currentTarget.attributes[1].value;
+      let Id = details.target.attributes[1].value;
       let IdParse = JSON.parse(Id);
       axios
         .request({
@@ -43,7 +43,7 @@ export default {
         });
     },
     completed(details) {
-      let Id = details.currentTarget.attributes[1].value;
+      let Id = details.target.attributes[1].value;
       let IdParse = JSON.parse(Id);
       axios
         .request({

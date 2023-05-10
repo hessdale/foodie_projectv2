@@ -1,10 +1,16 @@
 <template>
   <div>
     <div v-if="this.orders == null"></div>
-    <section v-for="(order, i) in orders" :key="i">
-      <h2>{{ order.name }}</h2>
-      <h5>{{ order.price }}</h5>
-    </section>
+    <div v-for="(order, i) in orders" :key="i">
+      <h1>order ID:{{ order[0].order_id }}</h1>
+      <h3 v-if="order[0].is_confirmed == 1">Order Confirmed</h3>
+      <h3 v-if="order[0].is_complete == 1">Order Complete</h3>
+      <section v-for="(item, q) in order" :key="q">
+        <h2>{{ item.name }}</h2>
+        <h5>${{ item.price }}</h5>
+        <p>{{ item.order_id }}</p>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -14,9 +20,29 @@ import cookies from "vue-cookies";
 export default {
   data() {
     return {
-      orders: undefined,
+      unsorted_orders: undefined,
       client_id: cookies.get(`client_id`),
+      orders: undefined,
     };
+  },
+  methods: {
+    sort_orders(unsorted_orders) {
+      let order_ids = [];
+      let sorted_orders = [];
+      for (let i = 0; i < unsorted_orders.length; i++) {
+        let index = order_ids.findIndex(
+          (order_id) => order_id === unsorted_orders[i].order_id
+        );
+        if (index !== -1) {
+          sorted_orders[index].push(unsorted_orders[i]);
+        } else {
+          sorted_orders.push([unsorted_orders[i]]);
+          order_ids.push(unsorted_orders[i].order_id);
+        }
+      }
+      this.orders = sorted_orders;
+      console.log(this.orders);
+    },
   },
   mounted() {
     if (this.client_id != undefined) {
@@ -31,8 +57,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          this.orders = response.data;
-          console.log(this.orders);
+          this.sort_orders(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -45,4 +70,7 @@ export default {
 </script>
 
 <style scoped>
+div {
+  margin-bottom: 40px;
+}
 </style>
