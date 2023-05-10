@@ -1,15 +1,13 @@
 <template>
   <div id="app">
     <nav>
-      | <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/clientlogin">clientlogin</router-link> |
-      <router-link to="/clientprofile">clientprofile</router-link> |
-      <router-link to="/restaurantlogin">restaurantlogin</router-link> |
-      <router-link to="/restaurantprofile">restaurantProfile</router-link> |
-      <router-link to="/discover">discover</router-link> |
-      <router-link to="/checkout">checkout</router-link> |
-      <router-link to="/orders">orders</router-link>
+      <router-link to="/clientlogin">ClientLogin</router-link> |
+      <router-link to="/clientprofile">ClientProfile</router-link> |
+      <router-link to="/restaurantlogin">RestaurantLogin</router-link> |
+      <router-link to="/restaurantprofile">RestaurantProfile</router-link> |
+      <router-link to="/discover">Discover</router-link> |
+      <router-link to="/checkout">Checkout</router-link> |
+      <router-link to="/orders">Orders</router-link>
     </nav>
     <router-view />
   </div>
@@ -34,6 +32,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #4a7964;
+  color: #d4671f;
 }
 </style>

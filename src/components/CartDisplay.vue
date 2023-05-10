@@ -5,7 +5,7 @@
         <h3>{{ cart.itemName }}</h3>
         <img width="100px" :src="cart.itemImg" :alt="cart.description" />
         <p>{{ cart.description }}</p>
-        <h4>${{ cart.itemPrice }}</h4>
+        <h4>{{ cart.itemPrice }}</h4>
       </section>
     </div>
     <div>
@@ -33,52 +33,67 @@ export default {
       details;
       //defines empty array of menu items and takes the first restaurant id and sets it as the main ID
       let menu_items = [];
+      let restaurant_ids = [];
+      for (let i = 0; i < this.carts.length; i++) {
+        restaurant_ids.push(this.carts[i].restaurant_id);
+      }
       let restaurant = this.carts[0].restaurant_id;
       //loops through cart and pushes the item ids to the array
       for (let i = 0; i < this.carts.length; i++) {
         menu_items.push(this.carts[i].itemId);
       }
-      //axios request to send the order
-      axios
-        .request({
-          url: `https://foodie.bymoen.codes/api/client-order`,
-          headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: cookies.get(`token`),
-          },
-          method: `POST`,
-          data: {
-            menu_items: menu_items,
-            restaurant_id: restaurant,
-          },
-        })
-        .then((response) => {
-          //MAYBE DELETE ALL OF THIS RESPONSE NOT SURE WHAT IT DOES or try to understand it
-          //defines empty order
-          let orders = [];
-          //if orderSent cookie is null then itsets the orderSent cookie wih response data
-          if (cookies.get(`orderSent`) == null) {
-            orders.push(response.data.order_id);
-            cookies.set(`orderSent`, orders);
+      //axios request to send the order only if restaurant ids are all the same
+      let checkedIds = [];
+      for (let i = 0; i < restaurant_ids.length; i++) {
+        if (checkedIds.length < 1) {
+          checkedIds.push(restaurant_ids[i]);
+          this.equals = true;
+        }
+
+        if (checkedIds[i] == restaurant_ids[i]) {
+          checkedIds.push(restaurant_ids[i]);
+          this.equals = true;
+        } else {
+          this.eqauls = false;
+        }
+      }
+      console.log(this.equals);
+      if (this.equals == true) {
+        axios
+          .request({
+            url: `https://foodie.bymoen.codes/api/client-order`,
+            headers: {
+              "x-api-key": `H0x7V93WN4ebcatCvCI3`,
+              token: cookies.get(`token`),
+            },
+            method: `POST`,
+            data: {
+              menu_items: menu_items,
+              restaurant_id: restaurant,
+            },
+          })
+          .then((response) => {
+            console.log(response);
             this.clear();
-          } else {
-            //if ordersent cookies is set then it gets info from orders and pushes the current order and new order to orders data
-            let currentOrders = cookies.get(`order`);
-            orders.push(currentOrders);
-            orders.push(response.data.order_id);
-            cookies.set(`orderSent`, orders);
-            this.clear();
-          }
-        })
-        .catch((error) => {
-          console.log(`only order from one restaurant at a time`);
-          console.log(error);
-        });
+            location.reload();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        document
+          .querySelector(`section`)
+          .insertAdjacentHTML(
+            `beforeend`,
+            `<h3>only order from one restaurant at a time`
+          );
+      }
     },
   },
   data() {
     return {
       carts: cookies.get(`order`),
+      equals: false,
     };
   },
 };

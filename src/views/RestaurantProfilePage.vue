@@ -22,8 +22,8 @@ export default {
     RestaurantEdit,
   },
   mounted() {
-    if (cookies.get(`token`) === null) {
-      this.$router.push(`/`);
+    if (cookies.get(`restuarant_id`) === null) {
+      this.$router.push(`/restaurantlogin`);
     }
   },
 };

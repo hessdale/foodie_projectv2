@@ -1,19 +1,21 @@
 <template>
   <div>
     <!-- form for user to register -->
-    <label for="Email">Email: </label>
-    <input type="text" id="Email" ref="userEmail" />
-    <label for="FirstName">First Name: </label>
-    <input type="text" id="FirstName" ref="userFirstName" />
-    <label for="LastName">Last Name: </label>
-    <input type="text" id="LastName" ref="userLastName" />
-    <label for="Pfp">Profile Picture (url): </label>
-    <input type="text" id="pfp" ref="userPfp" />
-    <label for="Username">Username: </label>
-    <input type="text" id="Username" ref="userUsername" />
-    <label for="Password">Password: </label>
-    <input type="text" id="Password" ref="userPassword" />
-    <button @click="Signup">Sign Up</button>
+    <section>
+      <label for="Email">Email: </label>
+      <input type="text" id="Email" ref="userEmail" />
+      <label for="FirstName">First Name: </label>
+      <input type="text" id="FirstName" ref="userFirstName" />
+      <label for="LastName">Last Name: </label>
+      <input type="text" id="LastName" ref="userLastName" />
+      <label for="Pfp">Profile Picture (url): </label>
+      <input type="text" id="pfp" ref="userPfp" />
+      <label for="Username">Username: </label>
+      <input type="text" id="Username" ref="userUsername" />
+      <label for="Password">Password: </label>
+      <input type="text" id="Password" ref="userPassword" />
+      <button @click="Signup">Sign Up</button>
+    </section>
   </div>
 </template>
 
@@ -48,13 +50,13 @@ export default {
           },
         })
         .then((response) => {
-          //sets cookies for client_id and token then reloads the page and displays success message
+          //sets cookies for client_id and token then displays success message and sends user to the profile page
           cookies.set(`token`, response.data.token);
           cookies.set(`client_id`, response.data.client_id);
           document
-            .querySelector(`div`)
+            .querySelector(`section`)
             .insertAdjacentHTML(`beforebegin`, `<h3>Creation Successful</h3>`);
-          location.reload();
+          this.$router.push(`/clientprofile`);
         })
         .catch((error) => {
           console.log(error);

@@ -52,27 +52,23 @@ export default {
     },
   },
   mounted() {
-    // if client_id is anything but undefined then it runs this axios request
-    if (this.client_id != undefined) {
-      axios
-        .request({
-          url: `https://foodie.bymoen.codes/api/client-order`,
-          headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: cookies.get(`token`),
-          },
-          method: `GET`,
-        })
-        .then((response) => {
-          //sends the response to function of sort_orders
-          this.sort_orders(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      console.log(`please log in`);
-    }
+    //axios request to get clients orders
+    axios
+      .request({
+        url: `https://foodie.bymoen.codes/api/client-order`,
+        headers: {
+          "x-api-key": `H0x7V93WN4ebcatCvCI3`,
+          token: cookies.get(`token`),
+        },
+        method: `GET`,
+      })
+      .then((response) => {
+        //sends the response to function of sort_orders
+        this.sort_orders(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>

@@ -17,7 +17,7 @@ export default {
   },
   mounted() {
     if (cookies.get(`token`) === null) {
-      this.$router.push(`/`);
+      this.$router.push(`/clientlogin`);
     }
   },
 };

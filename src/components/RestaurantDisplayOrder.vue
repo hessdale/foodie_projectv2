@@ -39,8 +39,8 @@ export default {
             is_confirmed: `true`,
           },
         })
-        .then((response) => {
-          response;
+        .then(() => {
+          console.log(`success`);
         })
         .catch((error) => {
           console.log(error);
@@ -63,8 +63,8 @@ export default {
             is_complete: `true`,
           },
         })
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          console.log(`success`);
         })
         .catch((error) => {
           console.log(error);
@@ -97,27 +97,23 @@ export default {
     };
   },
   mounted() {
-    //only if restaurant id is set then axios request is sent to get orders for this restaurant
-    if (this.restaurant_id != undefined) {
-      axios
-        .request({
-          url: `https://foodie.bymoen.codes/api/restaurant-order`,
-          headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-            token: cookies.get(`token`),
-          },
-          method: `GET`,
-        })
-        .then((response) => {
-          //calls on function to sort incoming order data
-          this.sort_orders(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      console.log(`please log in`);
-    }
+    axios
+      .request({
+        url: `https://foodie.bymoen.codes/api/restaurant-order`,
+        headers: {
+          "x-api-key": `H0x7V93WN4ebcatCvCI3`,
+          token: cookies.get(`token`),
+        },
+        method: `GET`,
+      })
+      .then((response) => {
+        //calls on function to sort incoming order data
+        this.sort_orders(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(`please log in`);
+      });
   },
 };
 </script>

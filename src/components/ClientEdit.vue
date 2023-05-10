@@ -5,17 +5,18 @@
     <section v-if="edit === true">
       <!-- form for client to edit profile -->
       <input type="text" ref="Email" placeholder="Email" />
-      <button @click="sendEmail">Change Email</button>
       <input type="text" ref="FirstName" placeholder="First Name" />
       <input type="text" ref="LastName" placeholder="Change Last Name" />
       <input type="text" ref="pfp" placeholder="Profile Picture (url)" />
       <input type="text" ref="Username" placeholder="Change Username" />
       <input type="text" ref="userPassword" placeholder="Password" />
       <button @click="SendEdit">Edit Profile Changes</button>
-      <label for="passdel">Password to delete account: </label>
-      <input type="text" id="passdel" ref="password" />
-      <!-- button to delete account if password is correct -->
-      <button @click="deleteAccount">DELETE ACCOUNT</button>
+      <!-- form and button to delete account if password is correct -->
+      <div>
+        <label for="passdel">Password to delete account: </label>
+        <input type="text" id="passdel" ref="password" />
+        <button @click="deleteAccount">DELETE ACCOUNT</button>
+      </div>
     </section>
   </div>
 </template>
@@ -124,4 +125,7 @@ export default {
 </script>
 
 <style scoped>
+div {
+  margin-top: 30px;
+}
 </style>

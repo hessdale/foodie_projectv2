@@ -111,7 +111,9 @@ export default {
         })
         .then(() => {
           //success message and then reload
-          document.querySelector(`sec`);
+          document
+            .querySelector(`section`)
+            .insertAdjacentHTML(`beforeend`, `<h3>edit successful</h3>`);
           location.reload();
         })
         .catch((error) => {
@@ -125,6 +127,7 @@ export default {
     };
   },
   mounted() {
+    //axios request with parsed restaured id from cookies
     axios
       .request({
         url: `https://foodie.bymoen.codes/api/menu`,
@@ -137,10 +140,11 @@ export default {
         method: `GET`,
       })
       .then((response) => {
+        //sets menu items to response
         this.menuItems = response.data;
       })
       .catch((error) => {
-        error;
+        console.log(error);
       });
   },
 };
