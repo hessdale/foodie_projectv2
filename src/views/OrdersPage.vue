@@ -8,11 +8,17 @@
 <script>
 import ClientDisplayOrder from "@/components/ClientDisplayOrder.vue";
 import RestaurantDisplayOrder from "@/components/RestaurantDisplayOrder.vue";
+import cookies from "vue-cookies";
 
 export default {
   components: {
     ClientDisplayOrder,
     RestaurantDisplayOrder,
+  },
+  mounted() {
+    if (cookies.get(`token`) === null) {
+      this.$router.push(`/`);
+    }
   },
 };
 </script>

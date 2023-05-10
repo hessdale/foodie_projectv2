@@ -49,6 +49,9 @@ export default {
           cookies.set(`token`, response.data.token);
           cookies.set(`client_id`, response.data.client_id);
           location.reload();
+          document
+            .querySelector(`div`)
+            .insertAdjacentHTML(`beforebegin`, `<h3>Creation Successful</h3>`);
         })
         .catch((error) => {
           console.log(error);

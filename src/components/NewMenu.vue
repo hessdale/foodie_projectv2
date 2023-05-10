@@ -1,5 +1,5 @@
 <template>
-  <div v-if="this.getID != undefined">
+  <div>
     <label for="description">description:</label>
     <input type="text" for="description" ref="description" />
 
@@ -19,11 +19,6 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
-  data() {
-    return {
-      getID: cookies.get(`restaurant_id`),
-    };
-  },
   methods: {
     newItem(details) {
       details;

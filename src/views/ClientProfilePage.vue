@@ -8,11 +8,17 @@
 <script>
 import ClientProfile from "@/components/ClientProfile.vue";
 import ClientEdit from "@/components/ClientEdit.vue";
+import cookies from "vue-cookies";
 
 export default {
   components: {
     ClientProfile,
     ClientEdit,
+  },
+  mounted() {
+    if (cookies.get(`token`) === null) {
+      this.$router.push(`/`);
+    }
   },
 };
 </script>

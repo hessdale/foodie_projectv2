@@ -12,6 +12,7 @@ import RestaurantProfile from "@/components/RestaurantProfile.vue";
 import RestaurantMenu from "@/components/RestaurantMenu.vue";
 import RestaurantEdit from "@/components/RestaurantEdit.vue";
 import NewMenu from "@/components/NewMenu.vue";
+import cookies from "vue-cookies";
 
 export default {
   components: {
@@ -19,6 +20,11 @@ export default {
     NewMenu,
     RestaurantMenu,
     RestaurantEdit,
+  },
+  mounted() {
+    if (cookies.get(`token`) === null) {
+      this.$router.push(`/`);
+    }
   },
 };
 </script>

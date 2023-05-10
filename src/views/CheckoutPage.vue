@@ -6,9 +6,15 @@
 
 <script>
 import CartDisplay from "@/components/CartDisplay.vue";
+import cookies from "vue-cookies";
 export default {
   components: {
     CartDisplay,
+  },
+  mounted() {
+    if (cookies.get(`token`) === null) {
+      this.$router.push(`/`);
+    }
   },
 };
 </script>

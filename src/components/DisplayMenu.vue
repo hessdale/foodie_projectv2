@@ -73,7 +73,6 @@ export default {
             restaurant_id: restId,
           },
         ]);
-        console.log(getItems);
       }
     },
   },

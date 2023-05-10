@@ -12,8 +12,12 @@
 import axios from "axios";
 import cookies from "vue-cookies";
 export default {
+  data() {
+    return {
+      logged_in: cookies.get(`token`),
+    };
+  },
   methods: {
-    // LOG IN
     login(details) {
       details;
       let email = this.$refs.userEmail[`value`];
@@ -35,10 +39,14 @@ export default {
           cookies.set(`client_id`, response.data.client_id);
           cookies.set(`restaurant_id`, undefined);
           location.reload();
+          document
+            .querySelector(`div`)
+            .insertAdjacentHTML(`beforebegin`, `<h3>Login Successful</h3>`);
         })
-        .catch((error) => {
-          error;
-          console.log(error);
+        .catch(() => {
+          document
+            .querySelector(`div`)
+            .insertAdjacentHTML(`beforebegin`, `<h3>Login Failes</h3>`);
         });
     },
   },
