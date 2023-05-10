@@ -43,7 +43,6 @@ export default {
         })
         .then((response) => {
           this.menu = response.data;
-
           this.$root.$emit(`menu_data`, this.menu);
           this.$root.$emit(`restaurant_id`, ID);
         })

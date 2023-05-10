@@ -15,7 +15,6 @@ export default {
   data() {
     return {
       orders: undefined,
-
       client_id: cookies.get(`client_id`),
     };
   },

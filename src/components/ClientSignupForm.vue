@@ -46,13 +46,11 @@ export default {
           },
         })
         .then((response) => {
-          response;
           cookies.set(`token`, response.data.token);
           cookies.set(`client_id`, response.data.client_id);
-          console.log(response);
+          location.reload();
         })
         .catch((error) => {
-          error;
           console.log(error);
         });
     },

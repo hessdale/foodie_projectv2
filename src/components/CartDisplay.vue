@@ -11,7 +11,6 @@
     <div>
       <button @click="order">order</button>
       <button @click="clear">clear cart</button>
-      <button @click="checkCart">check</button>
     </div>
   </div>
 </template>
@@ -21,13 +20,11 @@ import cookies from "vue-cookies";
 import axios from "axios";
 export default {
   methods: {
-    checkCart() {
-      console.log(this.carts);
-    },
     clear(details) {
       details;
       this.carts = undefined;
       cookies.set(`order`, undefined);
+      location.reload();
     },
     order(details) {
       details;

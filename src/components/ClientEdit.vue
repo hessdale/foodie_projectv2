@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="this.getID != undefined">
     <button @click="editstatus">edit profile</button>
     <section v-if="edit === true">
       <input type="text" ref="Email" placeholder="Email" />
@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       edit: false,
+      getID: cookies.get(`client_id`),
     };
   },
   methods: {

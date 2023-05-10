@@ -35,10 +35,16 @@ export default {
           cookies.set(`restaurant_id`, response.data.restaurant_id);
           console.log(response);
           cookies.set(`client_id`, undefined);
+          document
+            .querySelector(`div`)
+            .insertAdjacentHTML(`beforebegin`, `<h3>Log in Successful`);
         })
         .catch((error) => {
           error;
           console.log(error);
+          document
+            .querySelector(`div`)
+            .insertAdjacentHTML(`beforebegin`, `<h3>Log in Failed`);
         });
     },
   },

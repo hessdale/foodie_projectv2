@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="cookies.get(`restaurant_id`) != undefined">
     <h1>Edit Menu Items</h1>
     <div v-for="menuItem in menuItems" :key="menuItem.id">
       <h2>{{ menuItem.name }}</h2>
