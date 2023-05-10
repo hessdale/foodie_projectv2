@@ -1,5 +1,5 @@
 <template>
-  <div v-if="cookies.get(`restaurant_id`) != undefined">
+  <div>
     <h1>Edit Menu Items</h1>
     <div v-for="menuItem in menuItems" :key="menuItem.id">
       <h2>{{ menuItem.name }}</h2>
@@ -102,6 +102,7 @@ export default {
         })
         .then((response) => {
           console.log(response);
+          location.reload();
         })
         .catch((error) => {
           console.log(error);
