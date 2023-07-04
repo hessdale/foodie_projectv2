@@ -35,10 +35,7 @@ export default {
       //post axios request to make a new account
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/client`,
-          headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-          },
+          url: `${process.env.VUE_APP_BASE_URL}/api/client`,
           method: `POST`,
           data: {
             email: email,

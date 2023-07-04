@@ -52,10 +52,7 @@ export default {
     //axios request to get restaurant data
     axios
       .request({
-        url: `https://foodie.bymoen.codes/api/restaurant`,
-        headers: {
-          "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-        },
+        url: `${process.env.VUE_APP_BASE_URL}/api/restaurant`,
         method: `GET`,
         params: {
           restaurant_id: restaurantJson,
@@ -63,6 +60,7 @@ export default {
       })
       .then((response) => {
         //setting local variables of data
+        console.log(response)
         this.email = response.data[0].email;
         this.name = response.data[0].name;
         this.address = response.data[0].address;

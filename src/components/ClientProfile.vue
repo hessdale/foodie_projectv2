@@ -49,16 +49,14 @@ export default {
     //get request to recieve data for profile
     axios
       .request({
-        url: `https://foodie.bymoen.codes/api/client`,
-        headers: {
-          "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-        },
+        url: `${process.env.VUE_APP_BASE_URL}/api/client`,
         method: `GET`,
         params: {
           client_id: clientjson,
         },
       })
       .then((response) => {
+        console.log(response)
         //sets data to local variables
         this.created_at = response.data[0].created_at;
         this.email = response.data[0].email;

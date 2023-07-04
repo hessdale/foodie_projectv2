@@ -28,9 +28,8 @@ export default {
       //sends request with token and parsed id and changes is confirmed to true
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/restaurant-order`,
+          url: `${process.env.VUE_APP_BASE_URL}/api/restaurant-order`,
           headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
             token: cookies.get(`token`),
           },
           method: `PATCH`,
@@ -52,9 +51,8 @@ export default {
       let IdParse = JSON.parse(Id);
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/restaurant-order`,
+          url: `${process.env.VUE_APP_BASE_URL}/api/restaurant-order`,
           headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
             token: cookies.get(`token`),
           },
           method: `PATCH`,
@@ -99,9 +97,8 @@ export default {
   mounted() {
     axios
       .request({
-        url: `https://foodie.bymoen.codes/api/restaurant-order`,
+        url: `${process.env.VUE_APP_BASE_URL}/api/restaurant-order`,
         headers: {
-          "x-api-key": `H0x7V93WN4ebcatCvCI3`,
           token: cookies.get(`token`),
         },
         method: `GET`,

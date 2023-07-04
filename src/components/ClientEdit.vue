@@ -48,9 +48,8 @@ export default {
       //axios request to delete account from api
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/client`,
+          url: `${process.env.VUE_APP_BASE_URL}/api/client`,
           headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
             token: cookietoken,
           },
           method: `DELETE`,
@@ -101,9 +100,8 @@ export default {
       let cookietoken = cookies.get(`token`);
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/client`,
+          url: `${process.env.VUE_APP_BASE_URL}/api/client`,
           headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
             token: cookietoken,
           },
           method: `PATCH`,

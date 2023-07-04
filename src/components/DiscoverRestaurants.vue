@@ -10,7 +10,7 @@
       />
       <p>{{ restaurant[`city`] }}:{{ restaurant[`address`] }}</p>
       <p>{{ restaurant[`bio`] }}</p>
-      <button @click="viewmenu" :restaurantID="restaurant[`restaurant_id`]">
+      <button @click="viewmenu" :id="restaurant[`restaurant_id`]">
         MENU
       </button>
     </div>
@@ -30,14 +30,11 @@ export default {
   methods: {
     viewmenu(details) {
       //gets value from attribute set by loop above  and uses it in a get request
-      let ID = details.srcElement.attributes[1].value;
+      let ID = details.currentTarget.attributes[1].value;
       let IDparse = JSON.parse(ID);
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/menu`,
-          headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-          },
+          url: `${process.env.VUE_APP_BASE_URL}/api/menu`,
           method: `GET`,
           params: {
             restaurant_id: IDparse,
@@ -60,12 +57,10 @@ export default {
     //axios request to display the restaurants above
     axios
       .request({
-        url: `https://foodie.bymoen.codes/api/restaurants`,
-        headers: {
-          "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-        },
+        url: `${process.env.VUE_APP_BASE_URL}/api/restaurants`,
       })
       .then((response) => {
+        console.log(response.data)
         //sets local variable to response data
         this.restaurants = response.data;
       })

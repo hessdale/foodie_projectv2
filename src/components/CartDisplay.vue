@@ -61,9 +61,8 @@ export default {
       if (this.equals == true) {
         axios
           .request({
-            url: `https://foodie.bymoen.codes/api/client-order`,
+            url: `${process.env.VUE_APP_BASE_URL}/api/client-order`,
             headers: {
-              "x-api-key": `H0x7V93WN4ebcatCvCI3`,
               token: cookies.get(`token`),
             },
             method: `POST`,

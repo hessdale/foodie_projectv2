@@ -55,14 +55,14 @@ export default {
     //axios request to get clients orders
     axios
       .request({
-        url: `https://foodie.bymoen.codes/api/client-order`,
+        url: `${process.env.VUE_APP_BASE_URL}/api/client-order`,
         headers: {
-          "x-api-key": `H0x7V93WN4ebcatCvCI3`,
           token: cookies.get(`token`),
         },
         method: `GET`,
       })
       .then((response) => {
+        console.log(response)
         //sends the response to function of sort_orders
         this.sort_orders(response.data);
       })

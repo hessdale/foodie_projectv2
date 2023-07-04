@@ -40,10 +40,7 @@ export default {
       //axios request with values from form
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/restaurant`,
-          headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-          },
+          url: `${process.env.VUE_APP_BASE_URL}/api/restaurant`,
           method: `POST`,
           data: {
             email: email,

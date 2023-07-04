@@ -74,9 +74,8 @@ export default {
       //axios request using the params built by ifs above
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/restaurant`,
+          url: `${process.env.VUE_APP_BASE_URL}/api/restaurant`,
           headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
             token: cookietoken,
           },
           method: `PATCH`,
@@ -101,9 +100,8 @@ export default {
       //axios request for delete
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/restaurant`,
+          url: `${process.env.VUE_APP_BASE_URL}/api/restaurant`,
           headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
             token: cookietoken,
           },
           method: `DELETE`,

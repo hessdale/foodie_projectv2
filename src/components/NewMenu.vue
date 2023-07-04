@@ -37,9 +37,8 @@ export default {
       // axios request with values to create new item
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/menu`,
+          url: `${process.env.VUE_APP_BASE_URL}/api/menu`,
           headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
             token: restauranttoken,
           },
           method: `POST`,

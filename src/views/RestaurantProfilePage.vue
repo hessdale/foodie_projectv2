@@ -22,7 +22,7 @@ export default {
     RestaurantEdit,
   },
   mounted() {
-    if (cookies.get(`restuarant_id`) === null) {
+    if (cookies.get(`restaurant_id`) === null) {
       this.$router.push(`/restaurantlogin`);
     }
   },

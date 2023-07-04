@@ -19,10 +19,7 @@ export default {
       let password = this.$refs.userPassword[`value`];
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/restaurant-login`,
-          headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-          },
+          url: `${process.env.VUE_APP_BASE_URL}/api/restaurant-login`,
           method: `POST`,
           data: {
             email: email,
@@ -30,14 +27,11 @@ export default {
           },
         })
         .then((response) => {
+          console.log(response)
           //sets cookies token/restaurant and client ID and displays success message then reloads the page
-          cookies.set(`token`, response.data.token);
-          cookies.set(`restaurant_id`, response.data.restaurant_id);
+          cookies.set(`token`, response.data[0].token);
+          cookies.set(`restaurant_id`, response.data[0].restaurant_id);
           cookies.set(`client_id`, undefined);
-          document
-            .querySelector(`div`)
-            .insertAdjacentHTML(`beforebegin`, `<h3>Log in Successful`);
-          location.reload();
         })
         .catch((error) => {
           //displays log in failure message then reloads the page

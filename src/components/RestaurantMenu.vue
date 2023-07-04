@@ -50,10 +50,9 @@ export default {
       let token = cookies.get(`token`);
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/menu`,
+          url: `${process.env.VUE_APP_BASE_URL}/api/menu`,
 
           headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
             token: token,
           },
           data: {
@@ -100,9 +99,8 @@ export default {
       //acios request with built params and token
       axios
         .request({
-          url: `https://foodie.bymoen.codes/api/menu`,
+          url: `${process.env.VUE_APP_BASE_URL}/api/menu`,
           headers: {
-            "x-api-key": `H0x7V93WN4ebcatCvCI3`,
             token: token,
           },
           data: params,
@@ -130,10 +128,7 @@ export default {
     //axios request with parsed restaured id from cookies
     axios
       .request({
-        url: `https://foodie.bymoen.codes/api/menu`,
-        headers: {
-          "x-api-key": `H0x7V93WN4ebcatCvCI3`,
-        },
+        url: `${process.env.VUE_APP_BASE_URL}/api/menu`,
         params: {
           restaurant_id: JSON.parse(cookies.get(`restaurant_id`)),
         },
